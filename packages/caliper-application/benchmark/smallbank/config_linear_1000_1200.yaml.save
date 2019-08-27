@@ -1,0 +1,112 @@
+---
+test:
+  name: simple
+  description: This is an example benchmark for caliper, to test the backend DLT's
+    performance with simple account opening & querying transactions
+  clients:
+    type: local
+    number: 10
+  rounds:
+  - label: open
+    txNumber:
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 1000
+    - type: fixed-rate
+      opts:
+        tps: 1010
+    - type: fixed-rate
+      opts:
+        tps: 1020
+    - type: fixed-rate
+      opts:
+        tps: 1030
+    - type: fixed-rate
+      opts:
+        tps: 1040
+    - type: fixed-rate
+      opts:
+        tps: 1050
+    - type: fixed-rate
+      opts:
+        tps: 1060
+    - type: fixed-rate
+      opts:
+        tps: 1070
+    - type: fixed-rate
+      opt
+        tps: 560
+    - type: fixed-rate
+      opts:
+        tps: 580
+    - type: fixed-rate
+      opts:
+        tps: 600
+    - type: fixed-rate
+      opts:
+        tps: 620
+    - type: fixed-rate
+      opts:
+        tps: 640
+    - type: fixed-rate
+      opts:
+        tps: 660
+    - type: fixed-rate
+      opts:
+        tps: 680
+    - type: fixed-rate
+      opts:
+        tps: 700
+    - type: fixed-rate
+      opts:
+        tps: 720
+    - type: fixed-rate
+      opts:
+        tps: 740
+    - type: fixed-rate
+      opts:
+        tps: 760
+    - type: fixed-rate
+      opts:
+        tps: 780
+    - type: fixed-rate
+      opts:
+        tps: 800
+    arguments:
+      money: 10000
+    callback: benchmark/simple/open.js
+monitor:
+  type:
+  - docker
+  - process
+  docker:
+    name:
+    - all
+  process:
+  - command: node
+    arguments: local-client.js
+    multiOutput: avg
+  interval: 1
+

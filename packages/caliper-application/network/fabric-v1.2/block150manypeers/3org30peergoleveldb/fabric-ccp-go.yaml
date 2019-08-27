@@ -1,0 +1,984 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Fabric
+version: "1.0"
+mutual-tls: false
+
+caliper:
+  blockchain: fabric-ccp
+  command:
+    start: docker-compose -f network/fabric-v1.2/block150manypeers/3org30peergoleveldb/docker-compose.yaml up -d;sleep 3s
+    end: docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Size}}" > docker_info.txt;docker-compose -f network/fabric-v1.2/block150manypeers/3org30peergoleveldb/docker-compose.yaml down;docker rm $(docker ps -aq);docker rmi $(docker images dev* -q);rm -rf /tmp/hfc-*
+
+info:
+  Version: 1.2.0
+  Size: 3 Orgs with 30 Peers. Block 150
+  Orderer: Solo
+  Distribution: Single Host
+  StateDB: GoLevelDB
+
+clients:
+  client0.org1.example.com:
+    client:
+      organization: Org1
+      credentialStore:
+        path: /tmp/hfc-kvs/org1
+        cryptoStore:
+          path: /tmp/hfc-cvs/org1
+      clientPrivateKey:
+        path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/key.pem
+      clientSignedCert:
+        path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
+
+  client0.org2.example.com:
+    client:
+      organization: Org2
+      credentialStore:
+        path: /tmp/hfc-kvs/org2
+        cryptoStore:
+          path: /tmp/hfc-cvs/org2
+      clientPrivateKey:
+        path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/key.pem
+      clientSignedCert:
+        path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/User1@org2.example.com-cert.pem
+
+  client0.org3.example.com:
+    client:
+      organization: Org3
+      credentialStore:
+        path: /tmp/hfc-kvs/org3
+        cryptoStore:
+          path: /tmp/hfc-cvs/org3
+      clientPrivateKey:
+        path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org3.example.com/users/User1@org3.example.com/msp/keystore/key.pem
+      clientSignedCert:
+        path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org3.example.com/users/User1@org3.example.com/msp/signcerts/User1@org3.example.com-cert.pem
+
+channels:
+  mychannel:
+    configBinary: network/fabric-v1.2/block150manypeers/config/mychannel.tx
+    created: false
+    orderers:
+    - orderer.example.com
+    peers:
+      peer0.org1.example.com:
+        eventSource: true
+      peer1.org1.example.com:
+        eventSource: true
+      peer2.org1.example.com:
+        eventSource: true
+      peer3.org1.example.com:
+        eventSource: true
+      peer4.org1.example.com:
+        eventSource: true
+      peer5.org1.example.com:
+        eventSource: true
+      peer6.org1.example.com:
+        eventSource: true
+      peer7.org1.example.com:
+        eventSource: true
+      peer8.org1.example.com:
+        eventSource: true
+      peer9.org1.example.com:
+        eventSource: true
+      peer10.org1.example.com:
+        eventSource: true
+      peer11.org1.example.com:
+        eventSource: true
+      peer12.org1.example.com:
+        eventSource: true
+      peer13.org1.example.com:
+        eventSource: true
+      peer14.org1.example.com:
+        eventSource: true
+      peer15.org1.example.com:
+        eventSource: true
+      peer16.org1.example.com:
+        eventSource: true
+      peer17.org1.example.com:
+        eventSource: true
+      peer18.org1.example.com:
+        eventSource: true
+      peer19.org1.example.com:
+        eventSource: true
+      peer20.org1.example.com:
+        eventSource: true
+      peer21.org1.example.com:
+        eventSource: true
+      peer22.org1.example.com:
+        eventSource: true
+      peer23.org1.example.com:
+        eventSource: true
+      peer24.org1.example.com:
+        eventSource: true
+      peer25.org1.example.com:
+        eventSource: true
+      peer26.org1.example.com:
+        eventSource: true
+      peer27.org1.example.com:
+        eventSource: true
+      peer28.org1.example.com:
+        eventSource: true
+      peer29.org1.example.com:
+        eventSource: true
+      peer0.org2.example.com:
+        eventSource: true
+      peer1.org2.example.com:
+        eventSource: true
+      peer2.org2.example.com:
+        eventSource: true
+      peer3.org2.example.com:
+        eventSource: true
+      peer4.org2.example.com:
+        eventSource: true
+      peer5.org2.example.com:
+        eventSource: true
+      peer6.org2.example.com:
+        eventSource: true
+      peer7.org2.example.com:
+        eventSource: true
+      peer8.org2.example.com:
+        eventSource: true
+      peer9.org2.example.com:
+        eventSource: true
+      peer10.org2.example.com:
+        eventSource: true
+      peer11.org2.example.com:
+        eventSource: true
+      peer12.org2.example.com:
+        eventSource: true
+      peer13.org2.example.com:
+        eventSource: true
+      peer14.org2.example.com:
+        eventSource: true
+      peer15.org2.example.com:
+        eventSource: true
+      peer16.org2.example.com:
+        eventSource: true
+      peer17.org2.example.com:
+        eventSource: true
+      peer18.org2.example.com:
+        eventSource: true
+      peer19.org2.example.com:
+        eventSource: true
+      peer20.org2.example.com:
+        eventSource: true
+      peer21.org2.example.com:
+        eventSource: true
+      peer22.org2.example.com:
+        eventSource: true
+      peer23.org2.example.com:
+        eventSource: true
+      peer24.org2.example.com:
+        eventSource: true
+      peer25.org2.example.com:
+        eventSource: true
+      peer26.org2.example.com:
+        eventSource: true
+      peer27.org2.example.com:
+        eventSource: true
+      peer28.org2.example.com:
+        eventSource: true
+      peer29.org2.example.com:
+        eventSource: true
+      peer0.org3.example.com:
+        eventSource: true
+      peer1.org3.example.com:
+        eventSource: true
+      peer2.org3.example.com:
+        eventSource: true
+      peer3.org3.example.com:
+        eventSource: true
+      peer4.org3.example.com:
+        eventSource: true
+      peer5.org3.example.com:
+        eventSource: true
+      peer6.org3.example.com:
+        eventSource: true
+      peer7.org3.example.com:
+        eventSource: true
+      peer8.org3.example.com:
+        eventSource: true
+      peer9.org3.example.com:
+        eventSource: true
+      peer10.org3.example.com:
+        eventSource: true
+      peer11.org3.example.com:
+        eventSource: true
+      peer12.org3.example.com:
+        eventSource: true
+      peer13.org3.example.com:
+        eventSource: true
+      peer14.org3.example.com:
+        eventSource: true
+      peer15.org3.example.com:
+        eventSource: true
+      peer16.org3.example.com:
+        eventSource: true
+      peer17.org3.example.com:
+        eventSource: true
+      peer18.org3.example.com:
+        eventSource: true
+      peer19.org3.example.com:
+        eventSource: true
+      peer20.org3.example.com:
+        eventSource: true
+      peer21.org3.example.com:
+        eventSource: true
+      peer22.org3.example.com:
+        eventSource: true
+      peer23.org3.example.com:
+        eventSource: true
+      peer24.org3.example.com:
+        eventSource: true
+      peer25.org3.example.com:
+        eventSource: true
+      peer26.org3.example.com:
+        eventSource: true
+      peer27.org3.example.com:
+        eventSource: true
+      peer28.org3.example.com:
+        eventSource: true
+      peer29.org3.example.com:
+        eventSource: true
+
+    chaincodes:
+    - id: marbles
+      version: v0
+      language: golang
+      path: contract/fabric/marbles/go
+      metadataPath: src/contract/fabric/marbles/go/metadata
+    - id: drm
+      version: v0
+      language: golang
+      path: contract/fabric/drm
+    - id: simple
+      version: v0
+      language: golang
+      path: contract/fabric/simple/go
+    - id: smallbank
+      version: v0
+      language: golang
+      path: contract/fabric/smallbank
+      endorsement-policy:
+        identities:
+        - role:
+            name: member
+            mspId: Org1MSP
+        - role:
+            name: member
+            mspId: Org2MSP
+        - role:
+            name: member
+            mspId: Org3MSP
+        policy:
+          2-of:
+          - signed-by: 0
+          - signed-by: 1
+          - signed-by: 2
+
+organizations:
+  Org1:
+    mspid: Org1MSP
+    peers:
+    - peer0.org1.example.com
+    - peer1.org1.example.com
+    - peer2.org1.example.com
+    - peer3.org1.example.com
+    - peer4.org1.example.com
+    - peer5.org1.example.com
+    - peer6.org1.example.com
+    - peer7.org1.example.com
+    - peer8.org1.example.com
+    - peer9.org1.example.com
+    - peer10.org1.example.com
+    - peer11.org1.example.com
+    - peer12.org1.example.com
+    - peer13.org1.example.com
+    - peer14.org1.example.com
+    - peer15.org1.example.com
+    - peer16.org1.example.com
+    - peer17.org1.example.com
+    - peer18.org1.example.com
+    - peer19.org1.example.com
+    - peer20.org1.example.com
+    - peer21.org1.example.com
+    - peer22.org1.example.com
+    - peer23.org1.example.com
+    - peer24.org1.example.com
+    - peer25.org1.example.com
+    - peer26.org1.example.com
+    - peer27.org1.example.com
+    - peer28.org1.example.com
+    - peer29.org1.example.com
+    certificateAuthorities:
+    - ca.org1.example.com
+    adminPrivateKey:
+      path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/key.pem
+    signedCert:
+      path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+
+  Org2:
+    mspid: Org2MSP
+    peers:
+    - peer0.org2.example.com
+    - peer1.org2.example.com
+    - peer2.org2.example.com
+    - peer3.org2.example.com
+    - peer4.org2.example.com
+    - peer5.org2.example.com
+    - peer6.org2.example.com
+    - peer7.org2.example.com
+    - peer8.org2.example.com
+    - peer9.org2.example.com
+    - peer10.org2.example.com
+    - peer11.org2.example.com
+    - peer12.org2.example.com
+    - peer13.org2.example.com
+    - peer14.org2.example.com
+    - peer15.org2.example.com
+    - peer16.org2.example.com
+    - peer17.org2.example.com
+    - peer18.org2.example.com
+    - peer19.org2.example.com
+    - peer20.org2.example.com
+    - peer21.org2.example.com
+    - peer22.org2.example.com
+    - peer23.org2.example.com
+    - peer24.org2.example.com
+    - peer25.org2.example.com
+    - peer26.org2.example.com
+    - peer27.org2.example.com
+    - peer28.org2.example.com
+    - peer29.org2.example.com
+    certificateAuthorities:
+    - ca.org2.example.com
+    adminPrivateKey:
+      path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/key.pem
+    signedCert:
+      path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem
+
+  Org3:
+    mspid: Org3MSP
+    peers:
+    - peer0.org3.example.com
+    - peer1.org3.example.com
+    - peer2.org3.example.com
+    - peer3.org3.example.com
+    - peer4.org3.example.com
+    - peer5.org3.example.com
+    - peer6.org3.example.com
+    - peer7.org3.example.com
+    - peer8.org3.example.com
+    - peer9.org3.example.com
+    - peer10.org3.example.com
+    - peer11.org3.example.com
+    - peer12.org3.example.com
+    - peer13.org3.example.com
+    - peer14.org3.example.com
+    - peer15.org3.example.com
+    - peer16.org3.example.com
+    - peer17.org3.example.com
+    - peer18.org3.example.com
+    - peer19.org3.example.com
+    - peer20.org3.example.com
+    - peer21.org3.example.com
+    - peer22.org3.example.com
+    - peer23.org3.example.com
+    - peer24.org3.example.com
+    - peer25.org3.example.com
+    - peer26.org3.example.com
+    - peer27.org3.example.com
+    - peer28.org3.example.com
+    - peer29.org3.example.com
+    certificateAuthorities:
+    - ca.org3.example.com
+    adminPrivateKey:
+      path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore/key.pem
+    signedCert:
+      path: network/fabric-v1.2/block150manypeers/config/crypto-config/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts/Admin@org3.example.com-cert.pem
+
+orderers:
+  orderer.example.com:
+    url: grpc://localhost:7050
+    grpcOptions:
+      ssl-target-name-override: orderer.example.com
+
+peers:
+  peer0.org1.example.com:
+    url: grpc://localhost:7051
+    grpcOptions:
+      ssl-target-name-override: peer0.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer1.org1.example.com:
+    url: grpc://localhost:7057
+    grpcOptions:
+      ssl-target-name-override: peer1.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer2.org1.example.com:
+    url: grpc://localhost:7063
+    grpcOptions:
+      ssl-target-name-override: peer2.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer3.org1.example.com:
+    url: grpc://localhost:7069
+    grpcOptions:
+      ssl-target-name-override: peer3.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer4.org1.example.com:
+    url: grpc://localhost:7075
+    grpcOptions:
+      ssl-target-name-override: peer4.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer5.org1.example.com:
+    url: grpc://localhost:7081
+    grpcOptions:
+      ssl-target-name-override: peer5.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer6.org1.example.com:
+    url: grpc://localhost:7087
+    grpcOptions:
+      ssl-target-name-override: peer6.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer7.org1.example.com:
+    url: grpc://localhost:7093
+    grpcOptions:
+      ssl-target-name-override: peer7.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer8.org1.example.com:
+    url: grpc://localhost:7099
+    grpcOptions:
+      ssl-target-name-override: peer8.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer9.org1.example.com:
+    url: grpc://localhost:17005
+    grpcOptions:
+      ssl-target-name-override: peer9.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer10.org1.example.com:
+    url: grpc://localhost:17011
+    grpcOptions:
+      ssl-target-name-override: peer10.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer11.org1.example.com:
+    url: grpc://localhost:17017
+    grpcOptions:
+      ssl-target-name-override: peer11.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer12.org1.example.com:
+    url: grpc://localhost:17023
+    grpcOptions:
+      ssl-target-name-override: peer12.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer13.org1.example.com:
+    url: grpc://localhost:17029
+    grpcOptions:
+      ssl-target-name-override: peer13.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer14.org1.example.com:
+    url: grpc://localhost:17035
+    grpcOptions:
+      ssl-target-name-override: peer14.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer15.org1.example.com:
+    url: grpc://localhost:17041
+    grpcOptions:
+      ssl-target-name-override: peer15.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer16.org1.example.com:
+    url: grpc://localhost:17047
+    grpcOptions:
+      ssl-target-name-override: peer16.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer17.org1.example.com:
+    url: grpc://localhost:17053
+    grpcOptions:
+      ssl-target-name-override: peer17.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer18.org1.example.com:
+    url: grpc://localhost:17059
+    grpcOptions:
+      ssl-target-name-override: peer18.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer19.org1.example.com:
+    url: grpc://localhost:17065
+    grpcOptions:
+      ssl-target-name-override: peer19.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer20.org1.example.com:
+    url: grpc://localhost:17071
+    grpcOptions:
+      ssl-target-name-override: peer20.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer21.org1.example.com:
+    url: grpc://localhost:17077
+    grpcOptions:
+      ssl-target-name-override: peer21.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer22.org1.example.com:
+    url: grpc://localhost:17083
+    grpcOptions:
+      ssl-target-name-override: peer22.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer23.org1.example.com:
+    url: grpc://localhost:17089
+    grpcOptions:
+      ssl-target-name-override: peer23.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer24.org1.example.com:
+    url: grpc://localhost:17095
+    grpcOptions:
+      ssl-target-name-override: peer24.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer25.org1.example.com:
+    url: grpc://localhost:17101
+    grpcOptions:
+      ssl-target-name-override: peer25.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer26.org1.example.com:
+    url: grpc://localhost:17107
+    grpcOptions:
+      ssl-target-name-override: peer26.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer27.org1.example.com:
+    url: grpc://localhost:17113
+    grpcOptions:
+      ssl-target-name-override: peer27.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer28.org1.example.com:
+    url: grpc://localhost:17119
+    grpcOptions:
+      ssl-target-name-override: peer28.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer29.org1.example.com:
+    url: grpc://localhost:17125
+    grpcOptions:
+      ssl-target-name-override: peer29.org1.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer0.org2.example.com:
+    url: grpc://localhost:8051
+    grpcOptions:
+      ssl-target-name-override: peer0.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer1.org2.example.com:
+    url: grpc://localhost:8057
+    grpcOptions:
+      ssl-target-name-override: peer1.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer2.org2.example.com:
+    url: grpc://localhost:8063
+    grpcOptions:
+      ssl-target-name-override: peer2.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer3.org2.example.com:
+    url: grpc://localhost:8069
+    grpcOptions:
+      ssl-target-name-override: peer3.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer4.org2.example.com:
+    url: grpc://localhost:8075
+    grpcOptions:
+      ssl-target-name-override: peer4.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer5.org2.example.com:
+    url: grpc://localhost:8081
+    grpcOptions:
+      ssl-target-name-override: peer5.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer6.org2.example.com:
+    url: grpc://localhost:8087
+    grpcOptions:
+      ssl-target-name-override: peer6.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer7.org2.example.com:
+    url: grpc://localhost:8093
+    grpcOptions:
+      ssl-target-name-override: peer7.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer8.org2.example.com:
+    url: grpc://localhost:8099
+    grpcOptions:
+      ssl-target-name-override: peer8.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer9.org2.example.com:
+    url: grpc://localhost:18005
+    grpcOptions:
+      ssl-target-name-override: peer9.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer10.org2.example.com:
+    url: grpc://localhost:18011
+    grpcOptions:
+      ssl-target-name-override: peer10.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer11.org2.example.com:
+    url: grpc://localhost:18017
+    grpcOptions:
+      ssl-target-name-override: peer11.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer12.org2.example.com:
+    url: grpc://localhost:18023
+    grpcOptions:
+      ssl-target-name-override: peer12.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer13.org2.example.com:
+    url: grpc://localhost:18029
+    grpcOptions:
+      ssl-target-name-override: peer13.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer14.org2.example.com:
+    url: grpc://localhost:18035
+    grpcOptions:
+      ssl-target-name-override: peer14.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer15.org2.example.com:
+    url: grpc://localhost:18041
+    grpcOptions:
+      ssl-target-name-override: peer15.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer16.org2.example.com:
+    url: grpc://localhost:18047
+    grpcOptions:
+      ssl-target-name-override: peer16.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer17.org2.example.com:
+    url: grpc://localhost:18053
+    grpcOptions:
+      ssl-target-name-override: peer17.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer18.org2.example.com:
+    url: grpc://localhost:18059
+    grpcOptions:
+      ssl-target-name-override: peer18.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer19.org2.example.com:
+    url: grpc://localhost:18065
+    grpcOptions:
+      ssl-target-name-override: peer19.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer20.org2.example.com:
+    url: grpc://localhost:18071
+    grpcOptions:
+      ssl-target-name-override: peer20.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer21.org2.example.com:
+    url: grpc://localhost:18077
+    grpcOptions:
+      ssl-target-name-override: peer21.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer22.org2.example.com:
+    url: grpc://localhost:18083
+    grpcOptions:
+      ssl-target-name-override: peer22.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer23.org2.example.com:
+    url: grpc://localhost:18089
+    grpcOptions:
+      ssl-target-name-override: peer23.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer24.org2.example.com:
+    url: grpc://localhost:18095
+    grpcOptions:
+      ssl-target-name-override: peer24.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer25.org2.example.com:
+    url: grpc://localhost:18101
+    grpcOptions:
+      ssl-target-name-override: peer25.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer26.org2.example.com:
+    url: grpc://localhost:18107
+    grpcOptions:
+      ssl-target-name-override: peer26.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer27.org2.example.com:
+    url: grpc://localhost:18113
+    grpcOptions:
+      ssl-target-name-override: peer27.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer28.org2.example.com:
+    url: grpc://localhost:18119
+    grpcOptions:
+      ssl-target-name-override: peer28.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer29.org2.example.com:
+    url: grpc://localhost:18125
+    grpcOptions:
+      ssl-target-name-override: peer29.org2.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer0.org3.example.com:
+    url: grpc://localhost:9051
+    grpcOptions:
+      ssl-target-name-override: peer0.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer1.org3.example.com:
+    url: grpc://localhost:9057
+    grpcOptions:
+      ssl-target-name-override: peer1.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer2.org3.example.com:
+    url: grpc://localhost:9063
+    grpcOptions:
+      ssl-target-name-override: peer2.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer3.org3.example.com:
+    url: grpc://localhost:9069
+    grpcOptions:
+      ssl-target-name-override: peer3.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer4.org3.example.com:
+    url: grpc://localhost:9075
+    grpcOptions:
+      ssl-target-name-override: peer4.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer5.org3.example.com:
+    url: grpc://localhost:9081
+    grpcOptions:
+      ssl-target-name-override: peer5.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer6.org3.example.com:
+    url: grpc://localhost:9087
+    grpcOptions:
+      ssl-target-name-override: peer6.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer7.org3.example.com:
+    url: grpc://localhost:9093
+    grpcOptions:
+      ssl-target-name-override: peer7.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer8.org3.example.com:
+    url: grpc://localhost:9099
+    grpcOptions:
+      ssl-target-name-override: peer8.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer9.org3.example.com:
+    url: grpc://localhost:19005
+    grpcOptions:
+      ssl-target-name-override: peer9.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer10.org3.example.com:
+    url: grpc://localhost:19011
+    grpcOptions:
+      ssl-target-name-override: peer10.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer11.org3.example.com:
+    url: grpc://localhost:19017
+    grpcOptions:
+      ssl-target-name-override: peer11.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer12.org3.example.com:
+    url: grpc://localhost:19023
+    grpcOptions:
+      ssl-target-name-override: peer12.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer13.org3.example.com:
+    url: grpc://localhost:19029
+    grpcOptions:
+      ssl-target-name-override: peer13.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer14.org3.example.com:
+    url: grpc://localhost:19035
+    grpcOptions:
+      ssl-target-name-override: peer14.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer15.org3.example.com:
+    url: grpc://localhost:19041
+    grpcOptions:
+      ssl-target-name-override: peer15.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer16.org3.example.com:
+    url: grpc://localhost:19047
+    grpcOptions:
+      ssl-target-name-override: peer16.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer17.org3.example.com:
+    url: grpc://localhost:19053
+    grpcOptions:
+      ssl-target-name-override: peer17.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer18.org3.example.com:
+    url: grpc://localhost:19059
+    grpcOptions:
+      ssl-target-name-override: peer18.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer19.org3.example.com:
+    url: grpc://localhost:19065
+    grpcOptions:
+      ssl-target-name-override: peer19.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer20.org3.example.com:
+    url: grpc://localhost:19071
+    grpcOptions:
+      ssl-target-name-override: peer20.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer21.org3.example.com:
+    url: grpc://localhost:19077
+    grpcOptions:
+      ssl-target-name-override: peer21.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer22.org3.example.com:
+    url: grpc://localhost:19083
+    grpcOptions:
+      ssl-target-name-override: peer22.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer23.org3.example.com:
+    url: grpc://localhost:19089
+    grpcOptions:
+      ssl-target-name-override: peer23.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer24.org3.example.com:
+    url: grpc://localhost:19095
+    grpcOptions:
+      ssl-target-name-override: peer24.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer25.org3.example.com:
+    url: grpc://localhost:19101
+    grpcOptions:
+      ssl-target-name-override: peer25.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer26.org3.example.com:
+    url: grpc://localhost:19107
+    grpcOptions:
+      ssl-target-name-override: peer26.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer27.org3.example.com:
+    url: grpc://localhost:19113
+    grpcOptions:
+      ssl-target-name-override: peer27.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer28.org3.example.com:
+    url: grpc://localhost:19119
+    grpcOptions:
+      ssl-target-name-override: peer28.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+  peer29.org3.example.com:
+    url: grpc://localhost:19125
+    grpcOptions:
+      ssl-target-name-override: peer29.org3.example.com
+      grpc.keepalive_time_ms: 600000
+
+certificateAuthorities:
+  ca.org1.example.com:
+    url: http://localhost:7054
+    httpOptions:
+      verify: false
+    registrar:
+    - enrollId: admin
+      enrollSecret: adminpw
+
+  ca.org2.example.com:
+    url: http://localhost:8054
+    httpOptions:
+      verify: false
+    registrar:
+    - enrollId: admin
+      enrollSecret: adminpw
+
+  ca.org3.example.com:
+    url: http://localhost:9054
+    httpOptions:
+      verify: false
+    registrar:
+    - enrollId: admin
+      enrollSecret: adminpw
+
+
+

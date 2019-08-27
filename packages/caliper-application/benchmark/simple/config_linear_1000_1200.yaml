@@ -1,0 +1,111 @@
+---
+test:
+  name: simple
+  description: 1000-1200
+  clients:
+    type: local
+    number: 10
+  rounds:
+  - label: open
+    txNumber:
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    - 5000
+    rateControl:
+    - type: fixed-rate
+      opts:
+        tps: 1000
+    - type: fixed-rate
+      opts:
+        tps: 1010
+    - type: fixed-rate
+      opts:
+        tps: 1020
+    - type: fixed-rate
+      opts:
+        tps: 1030
+    - type: fixed-rate
+      opts:
+        tps: 1040
+    - type: fixed-rate
+      opts:
+        tps: 1050
+    - type: fixed-rate
+      opts:
+        tps: 1060
+    - type: fixed-rate
+      opts:
+        tps: 1070
+    - type: fixed-rate
+      opts:
+        tps: 1080
+    - type: fixed-rate
+      opts:
+        tps: 1090
+    - type: fixed-rate
+      opts:
+        tps: 1100
+    - type: fixed-rate
+      opts:
+        tps: 1110
+    - type: fixed-rate
+      opts:
+        tps: 1120
+    - type: fixed-rate
+      opts:
+        tps: 1130
+    - type: fixed-rate
+      opts:
+        tps: 1140
+    - type: fixed-rate
+      opts:
+        tps: 1150
+    - type: fixed-rate
+      opts:
+        tps: 1160
+    - type: fixed-rate
+      opts:
+        tps: 1170
+    - type: fixed-rate
+      opts:
+        tps: 1180
+    - type: fixed-rate
+      opts:
+        tps: 1190
+    - type: fixed-rate
+      opts:
+        tps: 1200
+    arguments:
+      money: 10000
+    callback: benchmark/simple/open.js
+monitor:
+  type:
+  - docker
+  - process
+  docker:
+    name:
+    - all
+  process:
+  - command: node
+    arguments: local-client.js
+    multiOutput: avg
+  interval: 1
+

@@ -1,0 +1,908 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+---
+################################################################################
+#
+#   Section: Organizations
+#
+#   - This section defines the different organizational identities which will
+#   be referenced later in the configuration.
+#
+################################################################################
+Organizations:
+
+    # SampleOrg defines an MSP using the sampleconfig.  It should never be used
+    # in production but may be used as a template for other definitions
+    - &OrdererOrg
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: OrdererMSP
+
+        # ID to load the MSP definition as
+        ID: OrdererMSP
+
+        # MSPDir is the filesystem path which contains the MSP configuration
+        MSPDir: crypto-config/ordererOrganizations/example.com/msp
+
+        AdminPrincipal: Role.MEMBER
+
+    - &Org0
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org1MSP
+
+        # ID to load the MSP definition as
+        ID: Org1MSP
+
+        MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org1.example.com
+              Port: 7051
+            - Host: peer1.org1.example.com
+              Port: 7051
+            - Host: peer2.org1.example.com
+              Port: 7051
+            - Host: peer3.org1.example.com
+              Port: 7051
+            - Host: peer4.org1.example.com
+              Port: 7051
+            - Host: peer5.org1.example.com
+              Port: 7051
+            - Host: peer6.org1.example.com
+              Port: 7051
+            - Host: peer7.org1.example.com
+              Port: 7051
+            - Host: peer8.org1.example.com
+              Port: 7051
+            - Host: peer9.org1.example.com
+              Port: 7051
+            - Host: peer10.org1.example.com
+              Port: 7051
+            - Host: peer11.org1.example.com
+              Port: 7051
+            - Host: peer12.org1.example.com
+              Port: 7051
+            - Host: peer13.org1.example.com
+              Port: 7051
+            - Host: peer14.org1.example.com
+              Port: 7051
+            - Host: peer15.org1.example.com
+              Port: 7051
+            - Host: peer16.org1.example.com
+              Port: 7051
+            - Host: peer17.org1.example.com
+              Port: 7051
+            - Host: peer18.org1.example.com
+              Port: 7051
+            - Host: peer19.org1.example.com
+              Port: 7051
+            - Host: peer20.org1.example.com
+              Port: 7051
+            - Host: peer21.org1.example.com
+              Port: 7051
+            - Host: peer22.org1.example.com
+              Port: 7051
+            - Host: peer23.org1.example.com
+              Port: 7051
+            - Host: peer24.org1.example.com
+              Port: 7051
+            - Host: peer25.org1.example.com
+              Port: 7051
+            - Host: peer26.org1.example.com
+              Port: 7051
+            - Host: peer27.org1.example.com
+              Port: 7051
+            - Host: peer28.org1.example.com
+              Port: 7051
+            - Host: peer29.org1.example.com
+              Port: 7051
+
+    - &Org1
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org2MSP
+
+        # ID to load the MSP definition as
+        ID: Org2MSP
+
+        MSPDir: crypto-config/peerOrganizations/org2.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org2.example.com
+              Port: 7051
+            - Host: peer1.org2.example.com
+              Port: 7051
+            - Host: peer2.org2.example.com
+              Port: 7051
+            - Host: peer3.org2.example.com
+              Port: 7051
+            - Host: peer4.org2.example.com
+              Port: 7051
+            - Host: peer5.org2.example.com
+              Port: 7051
+            - Host: peer6.org2.example.com
+              Port: 7051
+            - Host: peer7.org2.example.com
+              Port: 7051
+            - Host: peer8.org2.example.com
+              Port: 7051
+            - Host: peer9.org2.example.com
+              Port: 7051
+            - Host: peer10.org2.example.com
+              Port: 7051
+            - Host: peer11.org2.example.com
+              Port: 7051
+            - Host: peer12.org2.example.com
+              Port: 7051
+            - Host: peer13.org2.example.com
+              Port: 7051
+            - Host: peer14.org2.example.com
+              Port: 7051
+            - Host: peer15.org2.example.com
+              Port: 7051
+            - Host: peer16.org2.example.com
+              Port: 7051
+            - Host: peer17.org2.example.com
+              Port: 7051
+            - Host: peer18.org2.example.com
+              Port: 7051
+            - Host: peer19.org2.example.com
+              Port: 7051
+            - Host: peer20.org2.example.com
+              Port: 7051
+            - Host: peer21.org2.example.com
+              Port: 7051
+            - Host: peer22.org2.example.com
+              Port: 7051
+            - Host: peer23.org2.example.com
+              Port: 7051
+            - Host: peer24.org2.example.com
+              Port: 7051
+            - Host: peer25.org2.example.com
+              Port: 7051
+            - Host: peer26.org2.example.com
+              Port: 7051
+            - Host: peer27.org2.example.com
+              Port: 7051
+            - Host: peer28.org2.example.com
+              Port: 7051
+            - Host: peer29.org2.example.com
+              Port: 7051
+
+    - &Org2
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org3MSP
+
+        # ID to load the MSP definition as
+        ID: Org3MSP
+
+        MSPDir: crypto-config/peerOrganizations/org3.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org3.example.com
+              Port: 7051
+            - Host: peer1.org3.example.com
+              Port: 7051
+            - Host: peer2.org3.example.com
+              Port: 7051
+            - Host: peer3.org3.example.com
+              Port: 7051
+            - Host: peer4.org3.example.com
+              Port: 7051
+            - Host: peer5.org3.example.com
+              Port: 7051
+            - Host: peer6.org3.example.com
+              Port: 7051
+            - Host: peer7.org3.example.com
+              Port: 7051
+            - Host: peer8.org3.example.com
+              Port: 7051
+            - Host: peer9.org3.example.com
+              Port: 7051
+            - Host: peer10.org3.example.com
+              Port: 7051
+            - Host: peer11.org3.example.com
+              Port: 7051
+            - Host: peer12.org3.example.com
+              Port: 7051
+            - Host: peer13.org3.example.com
+              Port: 7051
+            - Host: peer14.org3.example.com
+              Port: 7051
+            - Host: peer15.org3.example.com
+              Port: 7051
+            - Host: peer16.org3.example.com
+              Port: 7051
+            - Host: peer17.org3.example.com
+              Port: 7051
+            - Host: peer18.org3.example.com
+              Port: 7051
+            - Host: peer19.org3.example.com
+              Port: 7051
+            - Host: peer20.org3.example.com
+              Port: 7051
+            - Host: peer21.org3.example.com
+              Port: 7051
+            - Host: peer22.org3.example.com
+              Port: 7051
+            - Host: peer23.org3.example.com
+              Port: 7051
+            - Host: peer24.org3.example.com
+              Port: 7051
+            - Host: peer25.org3.example.com
+              Port: 7051
+            - Host: peer26.org3.example.com
+              Port: 7051
+            - Host: peer27.org3.example.com
+              Port: 7051
+            - Host: peer28.org3.example.com
+              Port: 7051
+            - Host: peer29.org3.example.com
+              Port: 7051
+
+    - &Org3
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org4MSP
+
+        # ID to load the MSP definition as
+        ID: Org4MSP
+
+        MSPDir: crypto-config/peerOrganizations/org4.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org4.example.com
+              Port: 7051
+            - Host: peer1.org4.example.com
+              Port: 7051
+            - Host: peer2.org4.example.com
+              Port: 7051
+            - Host: peer3.org4.example.com
+              Port: 7051
+            - Host: peer4.org4.example.com
+              Port: 7051
+            - Host: peer5.org4.example.com
+              Port: 7051
+            - Host: peer6.org4.example.com
+              Port: 7051
+            - Host: peer7.org4.example.com
+              Port: 7051
+            - Host: peer8.org4.example.com
+              Port: 7051
+            - Host: peer9.org4.example.com
+              Port: 7051
+            - Host: peer10.org4.example.com
+              Port: 7051
+            - Host: peer11.org4.example.com
+              Port: 7051
+            - Host: peer12.org4.example.com
+              Port: 7051
+            - Host: peer13.org4.example.com
+              Port: 7051
+            - Host: peer14.org4.example.com
+              Port: 7051
+            - Host: peer15.org4.example.com
+              Port: 7051
+            - Host: peer16.org4.example.com
+              Port: 7051
+            - Host: peer17.org4.example.com
+              Port: 7051
+            - Host: peer18.org4.example.com
+              Port: 7051
+            - Host: peer19.org4.example.com
+              Port: 7051
+            - Host: peer20.org4.example.com
+              Port: 7051
+            - Host: peer21.org4.example.com
+              Port: 7051
+            - Host: peer22.org4.example.com
+              Port: 7051
+            - Host: peer23.org4.example.com
+              Port: 7051
+            - Host: peer24.org4.example.com
+              Port: 7051
+            - Host: peer25.org4.example.com
+              Port: 7051
+            - Host: peer26.org4.example.com
+              Port: 7051
+            - Host: peer27.org4.example.com
+              Port: 7051
+            - Host: peer28.org4.example.com
+              Port: 7051
+            - Host: peer29.org4.example.com
+              Port: 7051
+
+    - &Org4
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org5MSP
+
+        # ID to load the MSP definition as
+        ID: Org5MSP
+
+        MSPDir: crypto-config/peerOrganizations/org5.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org5.example.com
+              Port: 7051
+            - Host: peer1.org5.example.com
+              Port: 7051
+            - Host: peer2.org5.example.com
+              Port: 7051
+            - Host: peer3.org5.example.com
+              Port: 7051
+            - Host: peer4.org5.example.com
+              Port: 7051
+            - Host: peer5.org5.example.com
+              Port: 7051
+            - Host: peer6.org5.example.com
+              Port: 7051
+            - Host: peer7.org5.example.com
+              Port: 7051
+            - Host: peer8.org5.example.com
+              Port: 7051
+            - Host: peer9.org5.example.com
+              Port: 7051
+            - Host: peer10.org5.example.com
+              Port: 7051
+            - Host: peer11.org5.example.com
+              Port: 7051
+            - Host: peer12.org5.example.com
+              Port: 7051
+            - Host: peer13.org5.example.com
+              Port: 7051
+            - Host: peer14.org5.example.com
+              Port: 7051
+            - Host: peer15.org5.example.com
+              Port: 7051
+            - Host: peer16.org5.example.com
+              Port: 7051
+            - Host: peer17.org5.example.com
+              Port: 7051
+            - Host: peer18.org5.example.com
+              Port: 7051
+            - Host: peer19.org5.example.com
+              Port: 7051
+            - Host: peer20.org5.example.com
+              Port: 7051
+            - Host: peer21.org5.example.com
+              Port: 7051
+            - Host: peer22.org5.example.com
+              Port: 7051
+            - Host: peer23.org5.example.com
+              Port: 7051
+            - Host: peer24.org5.example.com
+              Port: 7051
+            - Host: peer25.org5.example.com
+              Port: 7051
+            - Host: peer26.org5.example.com
+              Port: 7051
+            - Host: peer27.org5.example.com
+              Port: 7051
+            - Host: peer28.org5.example.com
+              Port: 7051
+            - Host: peer29.org5.example.com
+              Port: 7051
+
+    - &Org5
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org6MSP
+
+        # ID to load the MSP definition as
+        ID: Org6MSP
+
+        MSPDir: crypto-config/peerOrganizations/org6.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org6.example.com
+              Port: 7051
+            - Host: peer1.org6.example.com
+              Port: 7051
+            - Host: peer2.org6.example.com
+              Port: 7051
+            - Host: peer3.org6.example.com
+              Port: 7051
+            - Host: peer4.org6.example.com
+              Port: 7051
+            - Host: peer5.org6.example.com
+              Port: 7051
+            - Host: peer6.org6.example.com
+              Port: 7051
+            - Host: peer7.org6.example.com
+              Port: 7051
+            - Host: peer8.org6.example.com
+              Port: 7051
+            - Host: peer9.org6.example.com
+              Port: 7051
+            - Host: peer10.org6.example.com
+              Port: 7051
+            - Host: peer11.org6.example.com
+              Port: 7051
+            - Host: peer12.org6.example.com
+              Port: 7051
+            - Host: peer13.org6.example.com
+              Port: 7051
+            - Host: peer14.org6.example.com
+              Port: 7051
+            - Host: peer15.org6.example.com
+              Port: 7051
+            - Host: peer16.org6.example.com
+              Port: 7051
+            - Host: peer17.org6.example.com
+              Port: 7051
+            - Host: peer18.org6.example.com
+              Port: 7051
+            - Host: peer19.org6.example.com
+              Port: 7051
+            - Host: peer20.org6.example.com
+              Port: 7051
+            - Host: peer21.org6.example.com
+              Port: 7051
+            - Host: peer22.org6.example.com
+              Port: 7051
+            - Host: peer23.org6.example.com
+              Port: 7051
+            - Host: peer24.org6.example.com
+              Port: 7051
+            - Host: peer25.org6.example.com
+              Port: 7051
+            - Host: peer26.org6.example.com
+              Port: 7051
+            - Host: peer27.org6.example.com
+              Port: 7051
+            - Host: peer28.org6.example.com
+              Port: 7051
+            - Host: peer29.org6.example.com
+              Port: 7051
+
+    - &Org6
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org7MSP
+
+        # ID to load the MSP definition as
+        ID: Org7MSP
+
+        MSPDir: crypto-config/peerOrganizations/org7.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org7.example.com
+              Port: 7051
+            - Host: peer1.org7.example.com
+              Port: 7051
+            - Host: peer2.org7.example.com
+              Port: 7051
+            - Host: peer3.org7.example.com
+              Port: 7051
+            - Host: peer4.org7.example.com
+              Port: 7051
+            - Host: peer5.org7.example.com
+              Port: 7051
+            - Host: peer6.org7.example.com
+              Port: 7051
+            - Host: peer7.org7.example.com
+              Port: 7051
+            - Host: peer8.org7.example.com
+              Port: 7051
+            - Host: peer9.org7.example.com
+              Port: 7051
+            - Host: peer10.org7.example.com
+              Port: 7051
+            - Host: peer11.org7.example.com
+              Port: 7051
+            - Host: peer12.org7.example.com
+              Port: 7051
+            - Host: peer13.org7.example.com
+              Port: 7051
+            - Host: peer14.org7.example.com
+              Port: 7051
+            - Host: peer15.org7.example.com
+              Port: 7051
+            - Host: peer16.org7.example.com
+              Port: 7051
+            - Host: peer17.org7.example.com
+              Port: 7051
+            - Host: peer18.org7.example.com
+              Port: 7051
+            - Host: peer19.org7.example.com
+              Port: 7051
+            - Host: peer20.org7.example.com
+              Port: 7051
+            - Host: peer21.org7.example.com
+              Port: 7051
+            - Host: peer22.org7.example.com
+              Port: 7051
+            - Host: peer23.org7.example.com
+              Port: 7051
+            - Host: peer24.org7.example.com
+              Port: 7051
+            - Host: peer25.org7.example.com
+              Port: 7051
+            - Host: peer26.org7.example.com
+              Port: 7051
+            - Host: peer27.org7.example.com
+              Port: 7051
+            - Host: peer28.org7.example.com
+              Port: 7051
+            - Host: peer29.org7.example.com
+              Port: 7051
+
+    - &Org7
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org8MSP
+
+        # ID to load the MSP definition as
+        ID: Org8MSP
+
+        MSPDir: crypto-config/peerOrganizations/org8.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org8.example.com
+              Port: 7051
+            - Host: peer1.org8.example.com
+              Port: 7051
+            - Host: peer2.org8.example.com
+              Port: 7051
+            - Host: peer3.org8.example.com
+              Port: 7051
+            - Host: peer4.org8.example.com
+              Port: 7051
+            - Host: peer5.org8.example.com
+              Port: 7051
+            - Host: peer6.org8.example.com
+              Port: 7051
+            - Host: peer7.org8.example.com
+              Port: 7051
+            - Host: peer8.org8.example.com
+              Port: 7051
+            - Host: peer9.org8.example.com
+              Port: 7051
+            - Host: peer10.org8.example.com
+              Port: 7051
+            - Host: peer11.org8.example.com
+              Port: 7051
+            - Host: peer12.org8.example.com
+              Port: 7051
+            - Host: peer13.org8.example.com
+              Port: 7051
+            - Host: peer14.org8.example.com
+              Port: 7051
+            - Host: peer15.org8.example.com
+              Port: 7051
+            - Host: peer16.org8.example.com
+              Port: 7051
+            - Host: peer17.org8.example.com
+              Port: 7051
+            - Host: peer18.org8.example.com
+              Port: 7051
+            - Host: peer19.org8.example.com
+              Port: 7051
+            - Host: peer20.org8.example.com
+              Port: 7051
+            - Host: peer21.org8.example.com
+              Port: 7051
+            - Host: peer22.org8.example.com
+              Port: 7051
+            - Host: peer23.org8.example.com
+              Port: 7051
+            - Host: peer24.org8.example.com
+              Port: 7051
+            - Host: peer25.org8.example.com
+              Port: 7051
+            - Host: peer26.org8.example.com
+              Port: 7051
+            - Host: peer27.org8.example.com
+              Port: 7051
+            - Host: peer28.org8.example.com
+              Port: 7051
+            - Host: peer29.org8.example.com
+              Port: 7051
+
+    - &Org8
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org9MSP
+
+        # ID to load the MSP definition as
+        ID: Org9MSP
+
+        MSPDir: crypto-config/peerOrganizations/org9.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org9.example.com
+              Port: 7051
+            - Host: peer1.org9.example.com
+              Port: 7051
+            - Host: peer2.org9.example.com
+              Port: 7051
+            - Host: peer3.org9.example.com
+              Port: 7051
+            - Host: peer4.org9.example.com
+              Port: 7051
+            - Host: peer5.org9.example.com
+              Port: 7051
+            - Host: peer6.org9.example.com
+              Port: 7051
+            - Host: peer7.org9.example.com
+              Port: 7051
+            - Host: peer8.org9.example.com
+              Port: 7051
+            - Host: peer9.org9.example.com
+              Port: 7051
+            - Host: peer10.org9.example.com
+              Port: 7051
+            - Host: peer11.org9.example.com
+              Port: 7051
+            - Host: peer12.org9.example.com
+              Port: 7051
+            - Host: peer13.org9.example.com
+              Port: 7051
+            - Host: peer14.org9.example.com
+              Port: 7051
+            - Host: peer15.org9.example.com
+              Port: 7051
+            - Host: peer16.org9.example.com
+              Port: 7051
+            - Host: peer17.org9.example.com
+              Port: 7051
+            - Host: peer18.org9.example.com
+              Port: 7051
+            - Host: peer19.org9.example.com
+              Port: 7051
+            - Host: peer20.org9.example.com
+              Port: 7051
+            - Host: peer21.org9.example.com
+              Port: 7051
+            - Host: peer22.org9.example.com
+              Port: 7051
+            - Host: peer23.org9.example.com
+              Port: 7051
+            - Host: peer24.org9.example.com
+              Port: 7051
+            - Host: peer25.org9.example.com
+              Port: 7051
+            - Host: peer26.org9.example.com
+              Port: 7051
+            - Host: peer27.org9.example.com
+              Port: 7051
+            - Host: peer28.org9.example.com
+              Port: 7051
+            - Host: peer29.org9.example.com
+              Port: 7051
+
+    - &Org9
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org10MSP
+
+        # ID to load the MSP definition as
+        ID: Org10MSP
+
+        MSPDir: crypto-config/peerOrganizations/org10.example.com/msp
+
+        AdminPrincipal: Role.ADMIN
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.org10.example.com
+              Port: 7051
+            - Host: peer1.org10.example.com
+              Port: 7051
+            - Host: peer2.org10.example.com
+              Port: 7051
+            - Host: peer3.org10.example.com
+              Port: 7051
+            - Host: peer4.org10.example.com
+              Port: 7051
+            - Host: peer5.org10.example.com
+              Port: 7051
+            - Host: peer6.org10.example.com
+              Port: 7051
+            - Host: peer7.org10.example.com
+              Port: 7051
+            - Host: peer8.org10.example.com
+              Port: 7051
+            - Host: peer9.org10.example.com
+              Port: 7051
+            - Host: peer10.org10.example.com
+              Port: 7051
+            - Host: peer11.org10.example.com
+              Port: 7051
+            - Host: peer12.org10.example.com
+              Port: 7051
+            - Host: peer13.org10.example.com
+              Port: 7051
+            - Host: peer14.org10.example.com
+              Port: 7051
+            - Host: peer15.org10.example.com
+              Port: 7051
+            - Host: peer16.org10.example.com
+              Port: 7051
+            - Host: peer17.org10.example.com
+              Port: 7051
+            - Host: peer18.org10.example.com
+              Port: 7051
+            - Host: peer19.org10.example.com
+              Port: 7051
+            - Host: peer20.org10.example.com
+              Port: 7051
+            - Host: peer21.org10.example.com
+              Port: 7051
+            - Host: peer22.org10.example.com
+              Port: 7051
+            - Host: peer23.org10.example.com
+              Port: 7051
+            - Host: peer24.org10.example.com
+              Port: 7051
+            - Host: peer25.org10.example.com
+              Port: 7051
+            - Host: peer26.org10.example.com
+              Port: 7051
+            - Host: peer27.org10.example.com
+              Port: 7051
+            - Host: peer28.org10.example.com
+              Port: 7051
+            - Host: peer29.org10.example.com
+              Port: 7051
+
+################################################################################
+#
+#   SECTION: Orderer
+#
+#   - This section defines the values to encode into a config transaction or
+#   genesis block for orderer related parameters
+#
+################################################################################
+Orderer: &OrdererDefaults
+
+    # Orderer Type: The orderer implementation to start
+    # Available types are "solo" and "kafka"
+    OrdererType: solo
+
+    Addresses:
+        - orderer.example.com:7050
+
+    # Batch Timeout: The amount of time to wait before creating a batch
+    BatchTimeout: 250ms
+
+    # Batch Size: Controls the number of messages batched into a block
+    BatchSize:
+
+        # Max Message Count: The maximum number of messages to permit in a batch
+        MaxMessageCount: 150
+
+        # Absolute Max Bytes: The absolute maximum number of bytes allowed for
+        # the serialized messages in a batch.
+        AbsoluteMaxBytes: 128 MB
+
+        # Preferred Max Bytes: The preferred maximum number of bytes allowed for
+        # the serialized messages in a batch. A message larger than the preferred
+        # max bytes will result in a batch larger than preferred max bytes.
+        PreferredMaxBytes: 128 MB
+
+    MaxChannels: 0
+
+    Kafka:
+        # Brokers: A list of Kafka brokers to which the orderer connects
+        # NOTE: Use IP:port notation
+        Brokers:
+            - 127.0.0.1:9092
+
+    # Organizations is the list of orgs which are defined as participants on
+    # the orderer side of the network
+    Organizations:
+
+################################################################################
+#
+#   SECTION: Application
+#
+#   - This section defines the values to encode into a config transaction or
+#   genesis block for application related parameters
+#
+################################################################################
+Application: &ApplicationDefaults
+
+    # Organizations is the list of orgs which are defined as participants on
+    # the application side of the network
+    Organizations:
+
+################################################################################
+#
+#   Profile
+#
+#   - Different configuration profiles may be encoded here to be specified
+#   as parameters to the configtxgen tool
+#
+################################################################################
+Profiles:
+
+    OrgsOrdererGenesis:
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *Org0
+                    - *Org1
+                    - *Org2
+                    - *Org3
+                    - *Org4
+                    - *Org5
+                    - *Org6
+                    - *Org7
+                    - *Org8
+                    - *Org9
+    OrgsChannel:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Org0
+                - *Org1
+                - *Org2
+                - *Org3
+                - *Org4
+                - *Org5
+                - *Org6
+                - *Org7
+                - *Org8
+                - *Org9
+
+
+
