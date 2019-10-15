@@ -84,6 +84,36 @@ This is a fork of the Hyperledger Caliper project. Many setupts for different bl
 * packages\caliper-application\network\fabric-v1.4\block500
 
 
+## Prerequisites
+
+* Node.js v8.X and npm
+  - https://nodejs.org/dist/latest-v8.x/
+* node-gyp
+  - https://github.com/nodejs/node-gyp
+* Docker
+  - Step 1: https://docs.docker.com/install/linux/docker-ce/ubuntu/
+  - Step 2: https://docs.docker.com/install/linux/linux-postinstall/
+* Docker compose
+  - https://docs.docker.com/compose/install/
+
+## Commands to run (run in root repo directory)
+
+```
+npm i
+npm run repoclean
+npm run bootstrap 
+```
+
+One liner:
+```
+npm i && npm run repoclean -- --yes && npm run bootstrap
+```
+
+To test the code (inside packages/caliper-application/):
+```
+node scripts/run-benchmark.js -c ../benchmark/simple/config.yaml -n ../network/fabric-v1.4/2org1peergoleveldb/fabric-ccp-go.yaml 
+```
+
 ## Hyperledger Caliper
 
 Welcome to the Hyperledger Caliper project. Caliper is a blockchain performance benchmark framework, which allows users to test different blockchain solutions with predefined use cases, and get a set of performance test results.
