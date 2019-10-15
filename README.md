@@ -8,6 +8,36 @@ This is a fork of the Hyperledger Caliper project. Many setupts for different bl
 * docker_info.txt - A txt file containing information about the state of the docker containers after running caliper.
 * results_all.json - A json file containing informaton about each transaction, with latency information for each stage, such as endorsement, ordering, etc. 
 
+## Prerequisites
+
+* Node.js v8.X and npm
+  - https://nodejs.org/dist/latest-v8.x/
+* node-gyp
+  - https://github.com/nodejs/node-gyp
+* Docker
+  - Step 1: https://docs.docker.com/install/linux/docker-ce/ubuntu/
+  - Step 2: https://docs.docker.com/install/linux/linux-postinstall/
+* Docker compose
+  - https://docs.docker.com/compose/install/
+
+## Commands to run (run in root repo directory)
+
+```
+npm i
+npm run repoclean
+npm run bootstrap 
+```
+
+One liner:
+```
+npm i && npm run repoclean -- --yes && npm run bootstrap
+```
+
+To test the code (inside packages/caliper-application/):
+```
+node scripts/run-benchmark.js -c ../benchmark/simple/config.yaml -n ../network/fabric-v1.4/2org1peergoleveldb/fabric-ccp-go.yaml 
+```
+
 #### **Edited files:**
 * packages\caliper-core\lib\caliper-flow.js
 * packages\caliper-core\lib\transaction-status.js
@@ -83,36 +113,6 @@ This is a fork of the Hyperledger Caliper project. Many setupts for different bl
 * packages\caliper-application\network\fabric-v1.4\block450
 * packages\caliper-application\network\fabric-v1.4\block500
 
-
-## Prerequisites
-
-* Node.js v8.X and npm
-  - https://nodejs.org/dist/latest-v8.x/
-* node-gyp
-  - https://github.com/nodejs/node-gyp
-* Docker
-  - Step 1: https://docs.docker.com/install/linux/docker-ce/ubuntu/
-  - Step 2: https://docs.docker.com/install/linux/linux-postinstall/
-* Docker compose
-  - https://docs.docker.com/compose/install/
-
-## Commands to run (run in root repo directory)
-
-```
-npm i
-npm run repoclean
-npm run bootstrap 
-```
-
-One liner:
-```
-npm i && npm run repoclean -- --yes && npm run bootstrap
-```
-
-To test the code (inside packages/caliper-application/):
-```
-node scripts/run-benchmark.js -c ../benchmark/simple/config.yaml -n ../network/fabric-v1.4/2org1peergoleveldb/fabric-ccp-go.yaml 
-```
 
 ## Hyperledger Caliper
 
